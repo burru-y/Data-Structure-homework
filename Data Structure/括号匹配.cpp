@@ -41,7 +41,7 @@ bool StatusMatching() {
     int flag = 1;           // 标记匹配结果以控制循环及返回结果
     char ch;
     cin >> ch;              // 读入第一个字符
-    while (ch != '#' && flag) {  // 假设表达式以 "#" 结尾
+    while (ch != '#' && flag) {  
         switch (ch) {
             case '[':
             case '(':           // 若是左括号，则将其压入栈
