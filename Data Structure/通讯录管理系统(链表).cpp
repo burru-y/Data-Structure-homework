@@ -17,7 +17,7 @@ struct Node {
 	Node* next;
 };
 
-// 通讯录结构体（链表实现）
+// 通讯录结构体
 struct Addressbooks {
 	Node* head;      // 头指针
 	int m_Size;      // 联系人数量
@@ -156,7 +156,6 @@ void deletePerson(Addressbooks* abs)
 		return;
 	}
 
-	// 如果要删除的是头节点
 	if (abs->head->person.m_Name == name) {
 		Node* temp = abs->head;
 		abs->head = abs->head->next;
@@ -165,7 +164,6 @@ void deletePerson(Addressbooks* abs)
 		cout << "删除成功" << endl;
 	}
 	else {
-		// 查找要删除的节点
 		Node* prev = abs->head;
 		Node* curr = abs->head->next;
 		while (curr != nullptr) {
