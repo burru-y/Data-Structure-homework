@@ -1,17 +1,32 @@
-#include <stdio.h>
-#define MAXSIZE 100  // Ë³Ğò±í×î´óÈİÁ¿
-
-// ¶¨ÒåË³Ğò±í½á¹¹
+#include <iostream>
+#define MAXSIZE 100  // é¡ºåºè¡¨æœ€å¤§å®¹é‡
+using namespace std;
+// å®šä¹‰é¡ºåºè¡¨ç»“æ„
 typedef struct {
     int data[MAXSIZE];
-    int length;  // µ±Ç°ÔªËØ¸öÊı
+    int length;  // å½“å‰å…ƒç´ ä¸ªæ•°
 } SqList;
+bool init(SqList&p) {
+    p.length = 0;
+    return true;
+}
 
-// ºÏ²¢Á½¸öµİÔöÓĞĞòË³Ğò±í LA¡¢LB µ½ LC£¬LC ÒÀÈ»µİÔöÓĞĞò
+bool push(SqList& p,int t) {
+  
+    if (p.length == MAXSIZE)return false;
+  
+        p.data[p.length] = t;
+  
+    p.length += 1;
+    return true; 
+}
+
+
+// åˆå¹¶ä¸¤ä¸ªé€’å¢æœ‰åºé¡ºåºè¡¨ LAã€LB åˆ° LCï¼ŒLC ä¾ç„¶é€’å¢æœ‰åº
 void MergeSqList(SqList LA, SqList LB, SqList* LC) {
     int i = 0, j = 0, k = 0;
 
-    // Ë«Ö¸Õë±éÀú£¬È¡½ÏĞ¡ÔªËØ
+    // åŒæŒ‡é’ˆéå†ï¼Œå–è¾ƒå°å…ƒç´ 
     while (i < LA.length && j < LB.length) {
         if (LA.data[i] <= LB.data[j]) {
             LC->data[k++] = LA.data[i++];
@@ -21,17 +36,52 @@ void MergeSqList(SqList LA, SqList LB, SqList* LC) {
         }
     }
 
-    // ´¦Àí LA Ê£ÓàÔªËØ
+    // å¤„ç† LA å‰©ä½™å…ƒç´ 
     while (i < LA.length) {
         LC->data[k++] = LA.data[i++];
     }
 
-    // ´¦Àí LB Ê£ÓàÔªËØ
+    // å¤„ç† LB å‰©ä½™å…ƒç´ 
     while (j < LB.length) {
         LC->data[k++] = LB.data[j++];
     }
 
-    LC->length = k;  // ¸üĞÂ³¤¶È
+    LC->length = k;  // æ›´æ–°é•¿åº¦
+}
+
+void print(SqList*p){
+    for (int i = 0;i < p->length;i++) {
+        cout << p->data[i] << " ";
+}
+    cout << endl;
+}
+
+int main() {
+    SqList a, b;int m, n;
+    init(a);
+    init(b);
+    cout << "è¯·è¾“å…¥a,bæœ‰åºé¡ºåºè¡¨å…ƒç´ ä¸ªæ•°" << endl;
+    while (true) {
+       
+        cin >> m >> n;
+        if (m + n > MAXSIZE)cout << "å…ƒç´ è¿‡å¤šï¼Œè¯·é‡æ–°è¾“å…¥";
+        else break;
+    }
+    cout << "è¯·è¾“å…¥a,bæœ‰åºé¡ºåºè¡¨å…ƒç´ " << endl;
+    for (int i = 0;i < m;i++) {
+        int t;cin >> t;
+        push(a, t);
+    }
+    for (int i = 0;i < n;i++) {
+        int t;cin >> t;
+        push(b, t);
+    }
+    SqList *c=new SqList;
+    init(*c);
+    MergeSqList(a, b, c);
+    cout << "åˆå¹¶åçš„æœ‰åºè¡¨ä¸ºï¼š";
+    print(c);
+    return 0;
 }
 
 
