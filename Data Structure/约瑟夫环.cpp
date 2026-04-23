@@ -27,7 +27,7 @@ bool init(linkedlist& p) {
 }
 
 //添加节点
-bool add(linkedlist& p,int e) {
+bool add(linkedlist& p, int e) {
 	node* a = p.head;
 	while (a->next != p.head) {
 		a = a->next;
@@ -38,7 +38,7 @@ bool add(linkedlist& p,int e) {
 	ad->next->prior = ad;
 	a->next = ad;
 	ad->prior = a;
-	p.length++ ;
+	p.length++;
 	return true;
 }
 
@@ -53,11 +53,15 @@ bool remove(linkedlist& p, node*& cur, int m) {
 			cur = cur->next;
 	}
 
+
+
 	node* del = cur;
 	// 下一轮的起点
 	cur = del->next;
 	if (cur == p.head)
 		cur = cur->next;
+
+	cout << del->index << "出循环链表" << endl;
 
 	// 删除
 	del->prior->next = del->next;
@@ -69,21 +73,21 @@ bool remove(linkedlist& p, node*& cur, int m) {
 
 
 //判断还剩几个节点
-int size(linkedlist&p) {
-	
+int size(linkedlist& p) {
+
 	return p.length;
 }
 
 int main() {
 	linkedlist p;
 	init(p);
-	int n,m;
+	int n, m;
 	cout << "请输入人数：" << endl;
 	cin >> n;
-	cout << "kill第几个人：" << endl;
+	cout << "第几个人：" << endl;
 	cin >> m;
 	for (int i = 1;i <= n;i++) {
-		add(p,i);
+		add(p, i);
 	}
 	node* cur = p.head->next;
 	while (size(p) != 1) {
